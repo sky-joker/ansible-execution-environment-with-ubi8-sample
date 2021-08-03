@@ -1,0 +1,13 @@
+ansible-core
+ansible-runner
+ncclient
+paramiko
+pyOpenSSL<20.0.0
+pypsrp[kerberos,credssp]
+pywinrm[kerberos,credssp]
+toml
+pexpect>=4.5
+python-daemon
+pyyaml
+six
+flit-core
