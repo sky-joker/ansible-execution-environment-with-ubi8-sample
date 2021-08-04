@@ -1,0 +1,7 @@
+---
+- name: sample playbook
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - debug:
+        msg: "Test Message"
