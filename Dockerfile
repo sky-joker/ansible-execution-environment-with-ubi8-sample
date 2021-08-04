@@ -2,15 +2,13 @@ FROM redhat/ubi8
 
 ARG DUMP_INIT_VERSION="1.2.5"
 
-COPY tools/requirements.txt /tmp/tools/requirements.txt
-
+COPY tools/requirements.txt /tmp/tools/requirements.txt 
 # update and install requirement packages
 RUN dnf -y update && \
     dnf -y install gcc \
                    python39 \
                    python39-devel \
-                   krb5-devel \
-                   wget
+                   krb5-devel
 
 RUN pip3 install --upgrade pip && \
     pip3 install -r /tmp/tools/requirements.txt
@@ -34,7 +32,8 @@ RUN for dir in \
       /etc/group ; \
     do touch $file ; chmod g+rw $file ; chgrp root $file ; done
 
-RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMP_INIT_VERSION}/dumb-init_${DUMP_INIT_VERSION}_x86_64 && \
+ADD https://github.com/Yelp/dumb-init/releases/download/v${DUMP_INIT_VERSION}/dumb-init_${DUMP_INIT_VERSION}_x86_64 /usr/local/bin/
+RUN mv /usr/local/bin/dumb-init_${DUMP_INIT_VERSION}_x86_64 /usr/local/bin/dumb-init && \
     chmod +x /usr/local/bin/dumb-init
 
 WORKDIR /runner
