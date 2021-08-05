@@ -8,7 +8,8 @@ RUN dnf -y update && \
     dnf -y install gcc \
                    python39 \
                    python39-devel \
-                   krb5-devel
+                   krb5-devel \
+                   git
 
 RUN pip3 install --upgrade pip && \
     pip3 install -r /tmp/tools/requirements.txt
