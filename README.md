@@ -43,7 +43,7 @@ $ podman push skyjokerxx/ansible-runner-with-ubi8-sample:latest
 
 ## How to run a playbook with a self-made runner container image via ansible-navigator
 
-You can run a playbook with the EE by using the [ansible-navigator](https://github.com/ansible/ansible-navigator).  
+You can run a playbook with the runner container by using the [ansible-navigator](https://github.com/ansible/ansible-navigator).  
 The following are steps to run a playbook.
 
 Create a virtual environment for python and install the ansible-navigator.
