@@ -41,7 +41,7 @@ Push the builded image to the docker hub.
 $ podman push skyjokerxx/ansible-runner-with-ubi8-sample:latest
 ```
 
-## How to run a playbook with a self-made execution environment(EE) via ansible-navigator
+## How to run a playbook with a self-made runner container image via ansible-navigator
 
 You can run a playbook with the EE by using the [ansible-navigator](https://github.com/ansible/ansible-navigator).  
 The following are steps to run a playbook.
@@ -56,7 +56,7 @@ $ . venv/bin/activate
 2.0.1
 ```
 
-Run a container with the image via the ansible-navigator.
+Run the runner container via the ansible-navigator.
 
 ```
 $ ansible-navigator --eei skyjokerxx/ansible-runner-with-ubi8-sample:latest
@@ -71,3 +71,56 @@ $ ansible-navigator --eei skyjokerxx/ansible-runner-with-ubi8-sample:latest
 Enter the run command in TUI mode.
 
 [![asciicast](https://asciinema.org/a/428894.svg)](https://asciinema.org/a/428894)
+
+## How to build an execution environment(EE) with the runner image
+
+You can build an execution environment(EE) with the runner image by using the [ansible-builder](https://github.com/ansible/ansible-builder).  
+Here example, I'll explain how to build a new EE that included [community.vmware](https://github.com/ansible-collections/community.vmware).  
+
+First, create execution-environment.yml that requires when building.  
+
+**execution-environment.yml**
+
+```yaml
+---
+version: 1
+build_arg_defaults:
+  EE_BASE_IMAGE: 'skyjokerxx/ansible-runner-with-ubi8-sample:latest'
+
+dependencies:
+  galaxy: requirements.yml
+  python: requirements.txt
+```
+
+Set a base container image to EE_BASE_IMAGE that you'd like to use.  
+Specify the requirements.yml and requirements.txt to install community.vmware and pyvmomi.  
+There are still other options, so please see the tool [documentation](https://ansible-builder.readthedocs.io/en/latest/definition.html).
+
+**requirements.yml**
+
+```yaml
+---
+collections:
+  - name: community.vmware
+```
+
+**requirements.txt**
+
+```
+pyvmomi
+```
+
+Run the ansible-builder command to build a new EE.
+
+```
+$ ansible-builder build -t new-ee:latest
+Running command:
+  podman build -f context/Containerfile -t new-ee:latest context
+(snip)
+$ podman images | grep new-ee
+localhost/new-ee                                      latest  77f152bfa911  4 minutes ago  864 MB
+```
+
+You can also run a playbook with the EE and the ansible-navigator on your local environment even when you will not pull container images from a remote repository.
+
+[![asciicast](https://asciinema.org/a/429397.svg)](https://asciinema.org/a/429397)
