@@ -121,6 +121,6 @@ $ podman images | grep new-ee
 localhost/new-ee                                      latest  77f152bfa911  4 minutes ago  864 MB
 ```
 
-You can also run a playbook with the EE and the ansible-navigator on your local environment even when you will not pull container images from a remote repository.
+You can also run a playbook with the EE and ansible-navigator on your local environment even when you will not pull container images from a remote repository.
 
 [![asciicast](https://asciinema.org/a/429397.svg)](https://asciinema.org/a/429397)
