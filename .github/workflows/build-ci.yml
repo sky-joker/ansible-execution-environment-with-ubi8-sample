@@ -1,0 +1,19 @@
+name: build-ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get -y install podman
+
+      - name: Build runner container image
+        run: |
+          podman build . -t test-runner:latest
