@@ -14,8 +14,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get update
-          apt-get -y install podman
+          sudo apt-get update
+          sudo apt-get -y install podman
 
       - name: Build runner container image
         run: |
