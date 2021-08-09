@@ -5,6 +5,9 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+    name: build
+
     steps:
       - name: Check out code
         uses: actions/checkout@v2
