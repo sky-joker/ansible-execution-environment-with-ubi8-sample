@@ -16,7 +16,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get -y install podman
+          pip install ansible-navigator
 
       - name: Build runner container image
         run: |
           podman build . -t test-runner:latest
+
+      - name: Run the sample_playbook with the test-runner container via ansible-navigator
+        run: |
+          ansible-navigator run sample_playbook.yml --eei test-runner:latest --pp never -m stdout
