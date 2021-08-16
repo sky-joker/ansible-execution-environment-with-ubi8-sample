@@ -1,6 +1,6 @@
 # ansible-runner-with-ubi8-sample
 
-[![](https://img.shields.io/docker/image-size/skyjokerxx/ansible-runner-with-ubi8-sample?sort=date&style=for-the-badge)](https://hub.docker.com/r/skyjokerxx/ansible-runner-with-ubi8-sample)
+[![](https://img.shields.io/docker/v/skyjokerxx/ansible-runner-with-ubi8-sample/latest?style=for-the-badge)](https://hub.docker.com/r/skyjokerxx/ansible-runner-with-ubi8-sample)
 
 This is a sample to build an ansible runner container with ubi8.  
 The ansible runner container will build based on [ansible-runner](https://github.com/ansible/ansible-runner).
